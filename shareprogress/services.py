@@ -1,6 +1,7 @@
 # Managing Buttons
 def create_button(page_url, button_template, page_title=None, *args):
-    """
+    """Arguments received
+
     page_url: The URL of the page to be shared.
     
     button_template: By knowing the button_template we know which channel
@@ -17,7 +18,8 @@ def create_button(page_url, button_template, page_title=None, *args):
     """
 
 def update_button(id, *args):
-    """
+    """Arguments received
+
     id: button ID.
     
     *args: Received arguments for the variant/s.
@@ -25,18 +27,21 @@ def update_button(id, *args):
     """
 
 def delete_button(id):
-    # id: button ID.
+    """id: button ID."""
+    pass
 
 # Managing variants (different versions for each channels, for A/B tests)
 def create_variant(channel, *args):
-    """
+    """Arguments received
+
     channel: email, twitter or facebook.
     
     *args: Received arguments for the variant.
     """
 
 def update_variant(id, *args):
-    """
+    """Arguments received
+
     id: button ID.
     
     *args: Received arguments for the variant/s.
