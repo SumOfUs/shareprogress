@@ -16,8 +16,6 @@ def create_button(page_url, button_template, variants, page_title=None):
 
     page_title: It's optional, when set to 'None' it will be scraped from the
     page_url automatically.
-
-    It will create a JSON object to be sent to ShareProgress.
     """
 
     body = {}
