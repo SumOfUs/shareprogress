@@ -1,7 +1,16 @@
 .idea/*
 *.iml
+
+# Virtualenv
 .Python
 bin/
 include/
 lib/
+
+# OS
 .DS_Store
+
+# Pytest
+__pycache__
+*.py[cod]
+pip-selfcheck.json
