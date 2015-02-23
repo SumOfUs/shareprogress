@@ -70,6 +70,8 @@ def update_button(id, variants):
     we would use the update_variant() function here.
     """
 
+    pass
+
 # Managing Pages
 def create_page(page_url, variants, page_title=None):
     """Creates a JSON object for a share page to be sent to ShareProgress.
@@ -85,6 +87,8 @@ def create_page(page_url, variants, page_title=None):
     page_url automatically.
     """
 
+    pass
+
 def update_page(id, variants):
     """Updates a ShareProgress page and returns a JSON object as response.
 
@@ -96,6 +100,8 @@ def update_page(id, variants):
     we would use the update_variant() function here.
     """
 
+    pass
+
 # Reading a button or page
 def read(id, type):
     """Reads the content of a ShareProgress button or page.
@@ -106,6 +112,8 @@ def read(id, type):
 
     type: 'button' or 'page' to determine the URL for the request.
     """
+
+    pass
 
 
 # Deleting a button or page
@@ -161,3 +169,5 @@ def update_variants(id, variants):
 
     variants: Received arguments for the variant/s.
     """
+
+    pass
