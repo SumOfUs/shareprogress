@@ -17,9 +17,7 @@ def create_button(page_url, button_template, variants, page_title=None):
     page_title: It's optional, when set to 'None' it will be scraped from the
     page_url automatically.
     """
-
     body = {}
-
     body['key'] = '123456'      # This will be taken from .env
     body['page_url'] = page_url
 
@@ -28,35 +26,24 @@ def create_button(page_url, button_template, variants, page_title=None):
 
     # button_template: i.e. 'sp_em_small' or 'sp_tw_large'
     body['button_template'] = button_template
-
     body['auto_fill'] = True    # Allows page_url scraping to fill info in
-
     body['variants'] = {}
 
     if (button_template[3:5] == 'em'):
         body['variants']['email'] = []
-
         for v in variants:
             email_variant = create_variant('email', v)
-
             body['variants']['email'].append(email_variant)
-
     elif (button_template[3:5] == 'tw'):
         body['variants']['twitter'] = []
-
         for v in variants:
             twitter_variant = create_variant('twitter', v)
-
             body['variants']['twitter'].append(twitter_variant)
-
     elif (button_template[3:5] == 'fb'):
         body['variants']['facebook'] = []
-
         for v in variants:
             facebook_variant = create_variant('facebook', v)
-
             body['variants']['facebook'].append(facebook_variant)
-
     return json.dumps(body)
 
 def update_button(id, variants):
@@ -69,7 +56,6 @@ def update_button(id, variants):
     variants: Received arguments for the variant/s.
     we would use the update_variant() function here.
     """
-
     pass
 
 # Managing Pages
@@ -86,7 +72,6 @@ def create_page(page_url, variants, page_title=None):
     page_title: It's optional, when 'None' it will be scraped from the
     page_url automatically.
     """
-
     pass
 
 def update_page(id, variants):
@@ -99,7 +84,6 @@ def update_page(id, variants):
     variants: Received arguments for the variant/s.
     we would use the update_variant() function here.
     """
-
     pass
 
 # Reading a button or page
@@ -112,7 +96,6 @@ def read(id, type):
 
     type: 'button' or 'page' to determine the URL for the request.
     """
-
     pass
 
 
@@ -126,7 +109,6 @@ def delete(id, type):
 
     type: 'button' or 'page' to determine the URL for the request.
     """
-
     pass
 
 # Managing variants (different versions for each channels, for A/B tests)
@@ -143,21 +125,16 @@ def create_variant(channel, variant):
         email_variant = {}
         email_variant['email_subject'] = variant['subject']
         email_variant['email_body'] = variant['body']
-
         return email_variant
-
     elif (channel == 'twitter'):
         twitter_variant = {}
         twitter_variant['twitter_message'] = variant['message']
-
         return twitter_variant
-
     elif (channel == 'facebook'):
         facebook_variant = {}
         facebook_variant['facebook_title'] = variant['title']
         facebook_variant['facebook_description'] = variant['description']
         facebook_variant['facebook_thumbnail'] = variant['thumbnail']
-
         return facebook_variant
 
 def update_variants(id, variants):
@@ -169,5 +146,4 @@ def update_variants(id, variants):
 
     variants: Received arguments for the variant/s.
     """
-
     pass

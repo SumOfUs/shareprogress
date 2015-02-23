@@ -8,7 +8,6 @@ def test_create_button_for_email():
         {"subject": "Email subject 2!", "body": "Email body 2"},
         {"subject": "Email subject 3!", "body": "Email body 3"}
     ]
-
     expected_result = (
         '{"button_template": "sp_em_large", '
         '"variants": '
@@ -37,7 +36,6 @@ def test_create_button_for_twitter():
         {"message": "Tweet 2!"},
         {"message": "Tweet 3!"}
     ]
-
     expected_result = (
         '{"button_template": "sp_tw_small", '
         '"variants": '
