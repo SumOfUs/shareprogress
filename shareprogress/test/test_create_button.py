@@ -30,9 +30,9 @@ def test_create_button_for_twitter():
         {"message": "Tweet 3!"}
     ]
 
-    expected_result = ('{"button_template": "sp_tw_small", "variants": {"twitter": '
-        '[{"twitter_message": "Tweet 1!"}, {"twitter_message": "Tweet 2!"}, '
-        '{"twitter_message": "Tweet 3!"}]}, "auto_fill": true, '
+    expected_result = ('{"button_template": "sp_tw_small", "variants": '
+        '{"twitter": [{"twitter_message": "Tweet 1!"}, {"twitter_message": '
+        '"Tweet 2!"}, {"twitter_message": "Tweet 3!"}]}, "auto_fill": true, '
         '"key": "123456", "page_url": "http://sumofus.org/"}')
 
     assert services.create_button(page_url=page_url,
@@ -51,14 +51,15 @@ def test_create_button_for_facebook():
             "thumbnail": "http://path_to_thumb/3"}
     ]
 
-    expected_result = ('{"button_template": "sp_fb_small", "variants": {"facebook": '
-        '[{"facebook_title": "Title 1!", "facebook_description": '
-        '"Description 1", "facebook_thumbnail": "http://path_to_thumb/1"}, '
-        '{"facebook_title": "Title 2!", "facebook_description": '
-        '"Description 2", "facebook_thumbnail": "http://path_to_thumb/2"}, '
-        '{"facebook_title": "Title 3!", "facebook_description": '
-        '"Description 3", "facebook_thumbnail": "http://path_to_thumb/3"}]}, '
-        '"auto_fill": true, "key": "123456", "page_url": "http://sumofus.org/"}')
+    expected_result = ('{"button_template": "sp_fb_small", "variants": '
+        '{"facebook": [{"facebook_title": "Title 1!", '
+        '"facebook_description": "Description 1", "facebook_thumbnail": '
+        '"http://path_to_thumb/1"}, {"facebook_title": "Title 2!", '
+        '"facebook_description": "Description 2", "facebook_thumbnail": '
+        '"http://path_to_thumb/2"}, {"facebook_title": "Title 3!", '
+        '"facebook_description": "Description 3", "facebook_thumbnail": '
+        '"http://path_to_thumb/3"}]}, "auto_fill": true, "key": "123456", '
+        '"page_url": "http://sumofus.org/"}')
 
     assert services.create_button(page_url=page_url,
         button_template=button_template,
