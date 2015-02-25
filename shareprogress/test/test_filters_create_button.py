@@ -61,55 +61,7 @@ def test_create_button_for_email():
 
     assert services.create_button(email_button_input) == expected_result
 
-def test_create_button_for_email_with_empty_API_key_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['key'] = ""
-    expected_result = ("Context: ['key'], Message: must be at least 1 "
-        "characters long")
-
-    assert services.create_button(email_button_input) == expected_result
-
-def test_create_button_for_email_with_no_API_key_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['key']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['key']")
-
-    assert services.create_button(email_button_input) == expected_result
-
-def test_create_button_for_email_with_empty_page_url_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['page_url'] = ""
-    expected_result = ("Context: ['page_url'], Message: must be at least 1 "
-        "characters long")
-
-    assert services.create_button(email_button_input) == expected_result
-
-def test_create_button_for_email_with_no_page_url_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['page_url']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['page_url']")
-
-    assert services.create_button(email_button_input) == expected_result
-
-def test_create_button_for_email_with_empty_button_template_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['button_template'] = ""
-    expected_result = ("Context: ['button_template'], Message: must match "
-        "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
-            "sp_fb_small|sp_fb_large)$")
-
-    assert services.create_button(email_button_input) == expected_result
-
-def test_create_button_for_email_with_no_button_template_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['button_template']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['button_template']")
-
-    assert services.create_button(email_button_input) == expected_result
-
+# Email variants
 def test_create_button_for_email_with_empty_variants_value():
     email_button_input = emailButtonInput().create()
     email_button_input['variants'] = ""
@@ -179,55 +131,7 @@ def test_create_button_for_twitter():
 
     assert services.create_button(twitter_button_input) == expected_result
 
-def test_create_button_for_twitter_with_empty_API_key_value():
-    twitter_button_input = twitterButtonInput().create()
-    twitter_button_input['key'] = ""
-    expected_result = ("Context: ['key'], Message: must be at least 1 "
-        "characters long")
-
-    assert services.create_button(twitter_button_input) == expected_result
-
-def test_create_button_for_twitter_with_no_API_key_provided():
-    twitter_button_input = twitterButtonInput().create()
-    del twitter_button_input['key']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['key']")
-
-    assert services.create_button(twitter_button_input) == expected_result
-
-def test_create_button_for_twitter_with_empty_page_url_value():
-    twitter_button_input = twitterButtonInput().create()
-    twitter_button_input['page_url'] = ""
-    expected_result = ("Context: ['page_url'], Message: must be at least 1 "
-        "characters long")
-
-    assert services.create_button(twitter_button_input) == expected_result
-
-def test_create_button_for_twitter_with_no_page_url_provided():
-    twitter_button_input = twitterButtonInput().create()
-    del twitter_button_input['page_url']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['page_url']")
-
-    assert services.create_button(twitter_button_input) == expected_result
-
-def test_create_button_for_twitter_with_empty_button_template_value():
-    twitter_button_input = twitterButtonInput().create()
-    twitter_button_input['button_template'] = ""
-    expected_result = ("Context: ['button_template'], Message: must match "
-        "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
-            "sp_fb_small|sp_fb_large)$")
-
-    assert services.create_button(twitter_button_input) == expected_result
-
-def test_create_button_for_twitter_with_no_button_template_provided():
-    twitter_button_input = twitterButtonInput().create()
-    del twitter_button_input['button_template']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['button_template']")
-
-    assert services.create_button(twitter_button_input) == expected_result
-
+# Twitter variants
 def test_create_button_for_twitter_with_empty_variants_value():
     twitter_button_input = twitterButtonInput().create()
     twitter_button_input['variants'] = ""
@@ -298,55 +202,7 @@ def test_create_button_for_facebook():
 
     assert services.create_button(facebook_button_input) == expected_result
 
-def test_create_button_for_facebook_with_empty_API_key_value():
-    facebook_button_input = facebookButtonInput().create()
-    facebook_button_input['key'] = ""
-    expected_result = ("Context: ['key'], Message: must be at least 1 "
-        "characters long")
-
-    assert services.create_button(facebook_button_input) == expected_result
-
-def test_create_button_for_facebook_with_no_API_key_provided():
-    facebook_button_input = facebookButtonInput().create()
-    del facebook_button_input['key']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['key']")
-
-    assert services.create_button(facebook_button_input) == expected_result
-
-def test_create_button_for_facebook_with_empty_page_url_value():
-    facebook_button_input = facebookButtonInput().create()
-    facebook_button_input['page_url'] = ""
-    expected_result = ("Context: ['page_url'], Message: must be at least 1 "
-        "characters long")
-
-    assert services.create_button(facebook_button_input) == expected_result
-
-def test_create_button_for_facebook_with_no_page_url_provided():
-    facebook_button_input = facebookButtonInput().create()
-    del facebook_button_input['page_url']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['page_url']")
-
-    assert services.create_button(facebook_button_input) == expected_result
-
-def test_create_button_for_facebook_with_empty_button_template_value():
-    facebook_button_input = facebookButtonInput().create()
-    facebook_button_input['button_template'] = ""
-    expected_result = ("Context: ['button_template'], Message: must match "
-        "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
-            "sp_fb_small|sp_fb_large)$")
-
-    assert services.create_button(facebook_button_input) == expected_result
-
-def test_create_button_for_facebook_with_no_button_template_provided():
-    facebook_button_input = facebookButtonInput().create()
-    del facebook_button_input['button_template']
-    expected_result = ("Context: [], Message: missing required "
-        "properties: ['button_template']")
-
-    assert services.create_button(facebook_button_input) == expected_result
-
+# Facebook variants
 def test_create_button_for_facebook_with_empty_variants_value():
     facebook_button_input = facebookButtonInput().create()
     facebook_button_input['variants'] = ""
@@ -360,3 +216,54 @@ def test_create_button_for_facebook_with_no_variants_provided():
     expected_result = ("Context: [], Message: missing required properties: ['variants']")
 
     assert services.create_button(facebook_button_input) == expected_result
+
+# ALL BUTTONS VALIDATIONS
+
+def test_create_button_for_email_with_empty_API_key_value():
+    email_button_input = emailButtonInput().create()
+    email_button_input['key'] = ""
+    expected_result = ("Context: ['key'], Message: must be at least 1 "
+        "characters long")
+
+    assert services.create_button(email_button_input) == expected_result
+
+def test_create_button_for_email_with_no_API_key_provided():
+    email_button_input = emailButtonInput().create()
+    del email_button_input['key']
+    expected_result = ("Context: [], Message: missing required "
+        "properties: ['key']")
+
+    assert services.create_button(email_button_input) == expected_result
+
+def test_create_button_for_email_with_empty_page_url_value():
+    email_button_input = emailButtonInput().create()
+    email_button_input['page_url'] = ""
+    expected_result = ("Context: ['page_url'], Message: must be at least 1 "
+        "characters long")
+
+    assert services.create_button(email_button_input) == expected_result
+
+def test_create_button_for_email_with_no_page_url_provided():
+    email_button_input = emailButtonInput().create()
+    del email_button_input['page_url']
+    expected_result = ("Context: [], Message: missing required "
+        "properties: ['page_url']")
+
+    assert services.create_button(email_button_input) == expected_result
+
+def test_create_button_for_email_with_empty_button_template_value():
+    email_button_input = emailButtonInput().create()
+    email_button_input['button_template'] = ""
+    expected_result = ("Context: ['button_template'], Message: must match "
+        "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
+            "sp_fb_small|sp_fb_large)$")
+
+    assert services.create_button(email_button_input) == expected_result
+
+def test_create_button_for_email_with_no_button_template_provided():
+    email_button_input = emailButtonInput().create()
+    del email_button_input['button_template']
+    expected_result = ("Context: [], Message: missing required "
+        "properties: ['button_template']")
+
+    assert services.create_button(email_button_input) == expected_result
