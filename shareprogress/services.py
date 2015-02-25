@@ -1,50 +1,67 @@
 import json
+import valideer as V
+from valideer import ValidationError
+from filters.button_schema import buttonSchema
 
 # Managing Buttons
-def create_button(page_url, button_template, variants, page_title=None):
+def create_button(data):
     """Creates a JSON object for a share button to be sent to ShareProgress.
 
-    Arguments received
-
-    page_url: The URL of the page to be shared.
-
-    button_template: By knowing the button_template we know which channel
-    is going to be set for that button (email, twitter or facebook).
-
-    variants: Received arguments for the variant/s
-    we would use the create_variant() function here.
-
-    page_title: It's optional, when set to 'None' it will be scraped from the
-    page_url automatically.
+    Arguments received:
+    data: A dictionary containing all the info about the button. For example:
+    {
+        "key": "123456",
+        "page_url": "http://sumofus.org/",
+        "wrapper_id": "main_wrapper",
+        "page_title": "My page title",
+        "auto_fill": True,
+        "button_template": "sp_em_large",
+        "variants": [
+            {"email_subject": "Email subject 1!",
+                "email_body": "Email body 1"},
+            {"email_subject": "Email subject 2!",
+                "email_body": "Email body 2"},
+            {"email_subject": "Email subject 3!",
+                "email_body": "Email body 3"}
+        ],
+        "advanced_options": {
+            "automatic_traffic_routing": True,
+            "buttons_optimize_actions": True,
+            "customize_params": {
+                "param": "param_to_use",
+                "e": "email_source",
+                "f": "facebook_source",
+                "t": "twitter_source",
+                "o": "dark_social_source"
+            }
+        }
+    }
     """
-    body = {}
-    body['key'] = '123456'      # This will be taken from .env
-    body['page_url'] = page_url
+    button = buttonSchema()
 
-    if (page_title is not None):
-        body['page_title'] = page_title
+    # Creates the general button schema to validate
+    email_validator = V.parse(button.schema())
 
-    # button_template: i.e. 'sp_em_small' or 'sp_tw_large'
-    body['button_template'] = button_template
-    body['auto_fill'] = True    # Allows page_url scraping to fill info in
-    body['variants'] = {}
+    try:
+        email_validator.validate(data)
+    except ValidationError as e:
+        return "Context: " + str(e.context) + ", Message: " + str(e.msg)
+    else:
+        # Depending on the share channel, creates the specific schema
+        # to validate variants
+        if (data['button_template'][3:5] == 'em'):
+            variants_validator = V.parse(button.email_schema())
+        elif (data['button_template'][3:5] == 'tw'):
+            variants_validator = V.parse(button.twitter_schema())
+        elif (data['button_template'][3:5] == 'fb'):
+            variants_validator = V.parse(button.facebook_schema())
 
-    if (button_template[3:5] == 'em'):
-        body['variants']['email'] = []
-        for v in variants:
-            email_variant = create_variant('email', v)
-            body['variants']['email'].append(email_variant)
-    elif (button_template[3:5] == 'tw'):
-        body['variants']['twitter'] = []
-        for v in variants:
-            twitter_variant = create_variant('twitter', v)
-            body['variants']['twitter'].append(twitter_variant)
-    elif (button_template[3:5] == 'fb'):
-        body['variants']['facebook'] = []
-        for v in variants:
-            facebook_variant = create_variant('facebook', v)
-            body['variants']['facebook'].append(facebook_variant)
-    return json.dumps(body)
+        try:
+            variants_validator.validate(data)
+        except ValidationError as e:
+            return "Context: " + str(e.context) + ", Message: " + str(e.msg)
+        else:
+            return json.dumps(data, sort_keys=True)
 
 def update_button(id, variants):
     """Updates a ShareProgress button and returns a JSON object as response.
@@ -112,31 +129,6 @@ def delete(id, type):
     pass
 
 # Managing variants (different versions for each channels, for A/B tests)
-def create_variant(channel, variant):
-    """Creates a variant for a specific channel of a button or page.
-
-    Arguments received
-
-    channel: email, twitter or facebook.
-
-    variant: contents for the new variant.
-    """
-    if (channel == 'email'):
-        email_variant = {}
-        email_variant['email_subject'] = variant['subject']
-        email_variant['email_body'] = variant['body']
-        return email_variant
-    elif (channel == 'twitter'):
-        twitter_variant = {}
-        twitter_variant['twitter_message'] = variant['message']
-        return twitter_variant
-    elif (channel == 'facebook'):
-        facebook_variant = {}
-        facebook_variant['facebook_title'] = variant['title']
-        facebook_variant['facebook_description'] = variant['description']
-        facebook_variant['facebook_thumbnail'] = variant['thumbnail']
-        return facebook_variant
-
 def update_variants(id, variants):
     """Updates a variant for a specific channel of a button or page.
 
