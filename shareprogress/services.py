@@ -12,18 +12,19 @@ def create_button(data):
     {
         "key": "123456",
         "page_url": "http://sumofus.org/",
-        "wrapper_id": "main_wrapper",
         "page_title": "My page title",
         "auto_fill": True,
         "button_template": "sp_em_large",
-        "variants": [
-            {"email_subject": "Email subject 1!",
-                "email_body": "Email body 1"},
-            {"email_subject": "Email subject 2!",
-                "email_body": "Email body 2"},
-            {"email_subject": "Email subject 3!",
-                "email_body": "Email body 3"}
-        ],
+        "variants": {
+            "email": [
+                {"email_subject": "Email subject 1!",
+                    "email_body": "Email body 1"},
+                {"email_subject": "Email subject 2!",
+                    "email_body": "Email body 2"},
+                {"email_subject": "Email subject 3!",
+                    "email_body": "Email body 3"}
+            ]
+        },
         "advanced_options": {
             "automatic_traffic_routing": True,
             "buttons_optimize_actions": True,

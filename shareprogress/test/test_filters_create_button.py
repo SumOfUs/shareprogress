@@ -7,18 +7,19 @@ class emailButtonInput():
         return {
             "key": "123456",
             "page_url": "http://sumofus.org/",
-            "wrapper_id": "main_wrapper",
+            "button_template": "sp_em_large",
             "page_title": "My page title",
             "auto_fill": True,
-            "button_template": "sp_em_large",
-            "variants": [
-                {"email_subject": "Email subject 1!",
-                    "email_body": "Email body 1"},
-                {"email_subject": "Email subject 2!",
-                    "email_body": "Email body 2"},
-                {"email_subject": "Email subject 3!",
-                    "email_body": "Email body 3"}
-            ],
+            "variants": {
+                "email": [
+                    {"email_subject": "Email subject 1!",
+                        "email_body": "Email body 1"},
+                    {"email_subject": "Email subject 2!",
+                        "email_body": "Email body 2"},
+                    {"email_subject": "Email subject 3!",
+                        "email_body": "Email body 3"}
+                ]
+            },
             "advanced_options": {
                 "automatic_traffic_routing": True,
                 "buttons_optimize_actions": True,
@@ -28,6 +29,10 @@ class emailButtonInput():
                     "f": "facebook_source",
                     "t": "twitter_source",
                     "o": "dark_social_source"
+                },
+                "id_pass": {
+                    "id": "track_id",
+                    "pass": "referrer_id"
                 }
             }
         }
@@ -36,27 +41,30 @@ def test_create_button_for_email():
     email_button_input = emailButtonInput().create()
     expected_result = ('{'
         '"advanced_options": {'
-        '"automatic_traffic_routing": true, '
-        '"buttons_optimize_actions": true, '
-        '"customize_params": {'
-            '"e": "email_source", '
-            '"f": "facebook_source", '
-            '"o": "dark_social_source", '
-            '"param": "param_to_use", '
-            '"t": "twitter_source"}}, '
+            '"automatic_traffic_routing": true, '
+            '"buttons_optimize_actions": true, '
+            '"customize_params": {'
+                '"e": "email_source", '
+                '"f": "facebook_source", '
+                '"o": "dark_social_source", '
+                '"param": "param_to_use", '
+                '"t": "twitter_source"}, '
+            '"id_pass": {'
+                '"id": "track_id", '
+                '"pass": "referrer_id"}}, '
         '"auto_fill": true, '
         '"button_template": "sp_em_large", '
         '"key": "123456", '
         '"page_title": "My page title", '
         '"page_url": "http://sumofus.org/", '
-        '"variants": [{'
-            '"email_body": "Email body 1", '
-                '"email_subject": "Email subject 1!"}, {'
-            '"email_body": "Email body 2", '
-                '"email_subject": "Email subject 2!"}, {'
-            '"email_body": "Email body 3", '
-                '"email_subject": "Email subject 3!"}], '
-        '"wrapper_id": "main_wrapper"}'
+        '"variants": {'
+            '"email": [{'
+                '"email_body": "Email body 1", '
+                    '"email_subject": "Email subject 1!"}, {'
+                '"email_body": "Email body 2", '
+                    '"email_subject": "Email subject 2!"}, {'
+                '"email_body": "Email body 3", '
+                    '"email_subject": "Email subject 3!"}]}}'
     )
 
     assert services.create_button(email_button_input) == expected_result
@@ -65,7 +73,7 @@ def test_create_button_for_email():
 def test_create_button_for_email_with_empty_variants_value():
     email_button_input = emailButtonInput().create()
     email_button_input['variants'] = ""
-    expected_result = ("Context: ['variants'], Message: must be Sequence")
+    expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(email_button_input) == expected_result
 
@@ -83,15 +91,16 @@ class twitterButtonInput():
         return {
             "key": "123456",
             "page_url": "http://sumofus.org/",
-            "wrapper_id": "main_wrapper",
             "page_title": "My page title",
             "auto_fill": True,
             "button_template": "sp_tw_large",
-            "variants": [
-                {"twitter_message": "Tweet 1!"},
-                {"twitter_message": "Tweet 2!"},
-                {"twitter_message": "Tweet 3!"}
-            ],
+            "variants": {
+                "twitter": [
+                    {"twitter_message": "Tweet 1!"},
+                    {"twitter_message": "Tweet 2!"},
+                    {"twitter_message": "Tweet 3!"}
+                ]
+            },
             "advanced_options": {
                 "automatic_traffic_routing": True,
                 "buttons_optimize_actions": True,
@@ -101,6 +110,10 @@ class twitterButtonInput():
                     "f": "facebook_source",
                     "t": "twitter_source",
                     "o": "dark_social_source"
+                },
+                "id_pass": {
+                    "id": "track_id",
+                    "pass": "referrer_id"
                 }
             }
         }
@@ -109,24 +122,27 @@ def test_create_button_for_twitter():
     twitter_button_input = twitterButtonInput().create()
     expected_result = ('{'
         '"advanced_options": {'
-        '"automatic_traffic_routing": true, '
-        '"buttons_optimize_actions": true, '
-        '"customize_params": {'
-            '"e": "email_source", '
-            '"f": "facebook_source", '
-            '"o": "dark_social_source", '
-            '"param": "param_to_use", '
-            '"t": "twitter_source"}}, '
+            '"automatic_traffic_routing": true, '
+            '"buttons_optimize_actions": true, '
+            '"customize_params": {'
+                '"e": "email_source", '
+                '"f": "facebook_source", '
+                '"o": "dark_social_source", '
+                '"param": "param_to_use", '
+                '"t": "twitter_source"}, '
+            '"id_pass": {'
+                '"id": "track_id", '
+                '"pass": "referrer_id"}}, '
         '"auto_fill": true, '
         '"button_template": "sp_tw_large", '
         '"key": "123456", '
         '"page_title": "My page title", '
         '"page_url": "http://sumofus.org/", '
-        '"variants": [{'
+        '"variants": {'
+        '"twitter": [{'
             '"twitter_message": "Tweet 1!"}, {'
             '"twitter_message": "Tweet 2!"}, {'
-            '"twitter_message": "Tweet 3!"}], '
-        '"wrapper_id": "main_wrapper"}'
+            '"twitter_message": "Tweet 3!"}]}}'
     )
 
     assert services.create_button(twitter_button_input) == expected_result
@@ -135,7 +151,7 @@ def test_create_button_for_twitter():
 def test_create_button_for_twitter_with_empty_variants_value():
     twitter_button_input = twitterButtonInput().create()
     twitter_button_input['variants'] = ""
-    expected_result = ("Context: ['variants'], Message: must be Sequence")
+    expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(twitter_button_input) == expected_result
 
@@ -153,21 +169,22 @@ class facebookButtonInput():
         return {
             "key": "123456",
             "page_url": "http://sumofus.org/",
-            "wrapper_id": "main_wrapper",
             "page_title": "My page title",
             "auto_fill": True,
             "button_template": "sp_fb_large",
-            "variants": [
-                {"facebook_title": "Title 1!",
-                    "facebook_description": "Description 1",
-                    "facebook_thumbnail": "http://path_to_thumb/1"},
-                {"facebook_title": "Title 2!",
-                    "facebook_description": "Description 2",
-                    "facebook_thumbnail": "http://path_to_thumb/2"},
-                {"facebook_title": "Title 3!",
-                    "facebook_description": "Description 3",
-                    "facebook_thumbnail": "http://path_to_thumb/3"}
-            ],
+            "variants": {
+                "facebook": [
+                    {"facebook_title": "Title 1!",
+                        "facebook_description": "Description 1",
+                        "facebook_thumbnail": "http://path_to_thumb/1"},
+                    {"facebook_title": "Title 2!",
+                        "facebook_description": "Description 2",
+                        "facebook_thumbnail": "http://path_to_thumb/2"},
+                    {"facebook_title": "Title 3!",
+                        "facebook_description": "Description 3",
+                        "facebook_thumbnail": "http://path_to_thumb/3"}
+                ]
+            },
             "advanced_options": {
                 "automatic_traffic_routing": True,
                 "buttons_optimize_actions": True,
@@ -177,27 +194,45 @@ class facebookButtonInput():
                     "f": "facebook_source",
                     "t": "twitter_source",
                     "o": "dark_social_source"
+                },
+                "id_pass": {
+                    "id": "track_id",
+                    "pass": "referrer_id"
                 }
             }
         }
 
 def test_create_button_for_facebook():
     facebook_button_input = facebookButtonInput().create()
-    expected_result = ('{"advanced_options": '
-        '{"automatic_traffic_routing": true, '
-        '"buttons_optimize_actions": true, "customize_params": '
-        '{"e": "email_source", "f": "facebook_source", '
-        '"o": "dark_social_source", "param": "param_to_use", '
-        '"t": "twitter_source"}}, "auto_fill": true, '
-        '"button_template": "sp_fb_large", "key": "123456", '
-        '"page_title": "My page title", "page_url": "http://sumofus.org/", '
-        '"variants": [{"facebook_description": "Description 1", '
-        '"facebook_thumbnail": "http://path_to_thumb/1", '
-        '"facebook_title": "Title 1!"}, {"facebook_description": '
-        '"Description 2", "facebook_thumbnail": "http://path_to_thumb/2", '
-        '"facebook_title": "Title 2!"}, {"facebook_description": '
-        '"Description 3", "facebook_thumbnail": "http://path_to_thumb/3", '
-        '"facebook_title": "Title 3!"}], "wrapper_id": "main_wrapper"}'
+    expected_result = ('{'
+        '"advanced_options": {'
+            '"automatic_traffic_routing": true, '
+            '"buttons_optimize_actions": true, '
+            '"customize_params": {'
+                '"e": "email_source", '
+                '"f": "facebook_source", '
+                '"o": "dark_social_source", '
+                '"param": "param_to_use", '
+                '"t": "twitter_source"}, '
+            '"id_pass": {'
+                '"id": "track_id", '
+                '"pass": "referrer_id"}}, "'
+        'auto_fill": true, '
+        '"button_template": "sp_fb_large", '
+        '"key": "123456", '
+        '"page_title": "My page title", '
+        '"page_url": "http://sumofus.org/", '
+        '"variants": {'
+            '"facebook": [{'
+                '"facebook_description": "Description 1", '
+                    '"facebook_thumbnail": "http://path_to_thumb/1", '
+                    '"facebook_title": "Title 1!"}, {'
+                '"facebook_description": "Description 2", '
+                    '"facebook_thumbnail": "http://path_to_thumb/2", '
+                    '"facebook_title": "Title 2!"}, {'
+                '"facebook_description": "Description 3", '
+                    '"facebook_thumbnail": "http://path_to_thumb/3", '
+                    '"facebook_title": "Title 3!"}]}}'
     )
 
     assert services.create_button(facebook_button_input) == expected_result
@@ -206,7 +241,7 @@ def test_create_button_for_facebook():
 def test_create_button_for_facebook_with_empty_variants_value():
     facebook_button_input = facebookButtonInput().create()
     facebook_button_input['variants'] = ""
-    expected_result = ("Context: ['variants'], Message: must be Sequence")
+    expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(facebook_button_input) == expected_result
 
