@@ -25,7 +25,7 @@ class buttonSchema():
                 },
                 "id_pass": {
                     "+id": V.String(min_length=1),
-                    "+pass": V.String(min_length=1)
+                    "+passed": V.String(min_length=1)
                 }
 
             }
@@ -37,7 +37,7 @@ class buttonSchema():
             "+variants": {
                 "+email": [
                     {"+email_subject": V.String(min_length=1),
-                        "+email_body": V.String(min_length=1)}
+                        "+email_body": re.compile('^.*{LINK}.*$')}
                 ]
             }
         }
@@ -47,7 +47,7 @@ class buttonSchema():
         return {
             "+variants": {
                 "+twitter": [
-                    {"+twitter_message": V.String(min_length=1)}
+                    {"+twitter_message": re.compile('^.*{LINK}.*$')}
                 ]
             }
         }

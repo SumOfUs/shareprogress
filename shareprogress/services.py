@@ -1,46 +1,96 @@
 import json
-import requests
 import valideer as V
 from valideer import ValidationError
 from filters.button_schema import buttonSchema
+from lib.share_progress_requests import shareProgressRequests
 
 # Managing Buttons
 def create_button(data):
-    """Creates a JSON object for a share button to be sent to ShareProgress.
+    """Validates the input (a dictionary) to send a POST request to
+    ShareProgress to create a share button. The result could be:
+    a) A dictionary containing the information of the created button or,
+    b) An Error message from ShareProgress (i.e. 'Bad API key').
 
     Arguments received:
     data: A dictionary containing all the info about the button. For example:
     {
-        "key": "123456",
-        "page_url": "http://sumofus.org/",
-        "page_title": "My page title",
-        "auto_fill": True,
-        "button_template": "sp_em_large",
-        "variants": {
-            "email": [
-                {"email_subject": "Email subject 1!",
-                    "email_body": "Email body 1"},
-                {"email_subject": "Email subject 2!",
-                    "email_body": "Email body 2"},
-                {"email_subject": "Email subject 3!",
-                    "email_body": "Email body 3"}
+        'key': '123456',
+        'page_url': 'http://sumofus.org/',
+        'page_title': 'My button name',
+        'auto_fill': True,
+        'button_template': 'sp_em_large',
+        'variants': {
+            'email': [
+                {'email_subject': 'Email subject 1!',
+                    'email_body': 'Email body 1 {LINK}'},
+                {'email_subject': 'Email subject 2!',
+                    'email_body': 'Email body 2 {LINK}'},
+                {'email_subject': 'Email subject 3!',
+                    'email_body': 'Email body 3 {LINK}'}
             ]
         },
-        "advanced_options": {
-            "automatic_traffic_routing": True,
-            "buttons_optimize_actions": True,
-            "customize_params": {
-                "param": "param_to_use",
-                "e": "email_source",
-                "f": "facebook_source",
-                "t": "twitter_source",
-                "o": "dark_social_source"
+        'advanced_options': {
+            'automatic_traffic_routing': True,
+            'buttons_optimize_actions': True,
+            'customize_params': {
+                'param': 'param_to_use',
+                'e': 'email_source',
+                'f': 'facebook_source',
+                't': 'twitter_source',
+                'o': 'dark_social_source'
             },
-            "id_pass": {
-                "id": "track_id",
-                "pass": "referrer_id"
+            'id_pass': {
+                'id': 'id',
+                'passed': 'referrer_id'
             }
         }
+    }
+    Example of a successful response:
+    {
+        'advanced_options': {
+            'id_pass': {
+                'id': 'id',
+                'passed': 'referrer_id'},
+            'automatic_traffic_routing': True,
+            'customize_params': {
+                'o': 'dark_social_source',
+                'e': 'email_source',
+                't': 'twitter_source',
+                'param': 'param_to_use',
+                'f': 'facebook_source'},
+            'buttons_optimize_actions': True},
+        'button_template': 'sp_em_large',
+        'found_snippet': False,
+        'page_title': 'My button name',
+        'share_button_html': u"<div class='sp_11838 sp_em_large' ></div>",
+        'variants': {
+            'twitter': [{
+                'twitter_message': 'SumOfUs {LINK}',
+                    'id': 46985}],
+        'facebook': [{
+            'facebook_title': 'SumOfUs',
+            'facebook_description': u"SumOfUs is a global movement of " +
+                "consumers, investors, and workers all around the " +
+                "world, standing together to hold corporations " +
+                "accountable for their actions and forge a new, " +
+                "sustainable and just path for our global economy. It's "+
+                "not going to be fast or easy.",
+                'facebook_thumbnail': 'http://sumofus.org/wp-content' +
+                '/themes/pgm/img/default-facebook.jpg',
+                'id': 46984}],
+        'email': [{
+            'email_subject': 'Email subject 1!',
+                'id': 46981,
+                'email_body': 'Email body 1 {LINK}'}, {
+            'email_subject': 'Email subject 2!',
+                'id': 46982,
+                'email_body': 'Email body 2 {LINK}'}, {
+            'email_subject': 'Email subject 3!',
+                'id': 46983, 'email_body':
+                'Email body 3 {LINK}'}]},
+        'is_active': False,
+        'id': 11838,
+        'page_url': 'http://sumofus.org/'
     }
     """
     button = buttonSchema()
@@ -67,7 +117,13 @@ def create_button(data):
         except ValidationError as e:
             return "Context: " + str(e.context) + ", Message: " + str(e.msg)
         else:
-            return json.dumps(data, sort_keys=True)
+            r = shareProgressRequests()
+            result = r.create(data)
+
+            if result['success']:
+                return result['response'][0]
+            else:
+                return result['message']
 
 def update_button(id, variants):
     """Updates a ShareProgress button and returns a JSON object as response.
