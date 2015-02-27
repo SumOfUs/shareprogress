@@ -39,6 +39,8 @@ class emailButtonInput():
         }
 
 def test_create_button_for_email(monkeypatch):
+    # We create the 'create_for_test' function to replace the real 'create'
+    # function to avoid sending an actual request to Shareprogress.
     def create_for_test(self, data):
         return {
             'message': None,
@@ -94,6 +96,8 @@ def test_create_button_for_email(monkeypatch):
                 'page_url': 'http://sumofus.org/'}],
             'success': True}
 
+    # We use monkeypatch from pytest to replace the 'create' function with
+    # the 'create_for_test' function.
     monkeypatch.setattr(shareProgressRequests, 'create', create_for_test)
 
     email_button_input = emailButtonInput().create()
