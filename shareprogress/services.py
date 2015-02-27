@@ -103,8 +103,9 @@ def create_button(data):
     except ValidationError as e:
         return "Context: " + str(e.context) + ", Message: " + str(e.msg)
     else:
-        # Depending on the share channel, creates the specific schema
-        # to validate variants
+        """Depending on the share channel, creates the specific schema
+        to validate variants
+        """
         if (data['button_template'][3:5] == 'em'):
             variants_validator = V.parse(button.email_schema())
         elif (data['button_template'][3:5] == 'tw'):
