@@ -1,55 +1,21 @@
 from shareprogress import services
-from shareprogress.lib.share_progress_requests import shareProgressRequests
+from shareprogress.lib.share_progress_requests import shareProgressRequest
 from mock_functions import mockFunctions
+from generator import generator
 
 # EMAIL BUTTON VALIDATION
 
-class emailButtonInput():
-    def create(self):
-        return {
-            'key': '123456',
-            'page_url': 'http://sumofus.org/',
-            'page_title': 'My button name',
-            'auto_fill': True,
-            'button_template': 'sp_em_large',
-            'variants': {
-                'email': [
-                    {'email_subject': 'Email subject 1!',
-                        'email_body': 'Email body 1 {LINK}'},
-                    {'email_subject': 'Email subject 2!',
-                        'email_body': 'Email body 2 {LINK}'},
-                    {'email_subject': 'Email subject 3!',
-                        'email_body': 'Email body 3 {LINK}'}
-                ]
-            },
-            'advanced_options': {
-                'automatic_traffic_routing': True,
-                'buttons_optimize_actions': True,
-                'customize_params': {
-                    'param': 'param_to_use',
-                    'e': 'email_source',
-                    'f': 'facebook_source',
-                    't': 'twitter_source',
-                    'o': 'dark_social_source'
-                },
-                'id_pass': {
-                    'id': 'id',
-                    'passed': 'referrer_id'
-                }
-            }
-        }
-
-def test_create_button_for_email(monkeypatch):
+def test_create_email_button(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
-    from pytest to replace the 'create' function (from the
-    shareProgressRequests module) with the 'create_email_for_test' function
+    from pytest to replace the 'create_button' function (from the
+    shareProgressRequest module) with the 'create_button_email_test' function
     (from the mock_functions module).
     """
-    monkeypatch.setattr(shareProgressRequests, 'create',
-        mockFunctions().create_email_for_test)
+    monkeypatch.setattr(shareProgressRequest, 'create_button',
+        mockFunctions().create_button_email_test)
 
-    email_button_input = emailButtonInput().create()
+    button = generator().create_button('email')
     expected_result = {
         'advanced_options': {
             'id_pass': {
@@ -97,69 +63,37 @@ def test_create_button_for_email(monkeypatch):
         'page_url': 'http://sumofus.org/'
     }
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
 # Email variants
-def test_create_button_for_email_with_empty_variants_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['variants'] = ""
+def test_create_email_button_with_empty_variants_value():
+    button = generator().create_button('email')
+    button['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_email_with_no_variants_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['variants']
+def test_create_email_button_with_no_variants_provided():
+    button = generator().create_button('email')
+    del button['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
 # TWITTER BUTTON VALIDATION
 
-class twitterButtonInput():
-    def create(self):
-        return {
-            'key': '123456',
-            'page_url': 'http://sumofus.org/',
-            'page_title': 'My button name',
-            'auto_fill': True,
-            'button_template': 'sp_tw_large',
-            'variants': {
-                'twitter': [
-                    {'twitter_message': 'Tweet 1! {LINK}'},
-                    {'twitter_message': 'Tweet 2! {LINK}'},
-                    {'twitter_message': 'Tweet 3! {LINK}'}
-                ]
-            },
-            'advanced_options': {
-                'automatic_traffic_routing': True,
-                'buttons_optimize_actions': True,
-                'customize_params': {
-                    'param': 'param_to_use',
-                    'e': 'email_source',
-                    'f': 'facebook_source',
-                    't': 'twitter_source',
-                    'o': 'dark_social_source'
-                },
-                'id_pass': {
-                    'id': 'id',
-                    'passed': 'referrer_id'
-                }
-            }
-        }
-
-def test_create_button_for_twitter(monkeypatch):
+def test_create_twitter_button(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
-    from pytest to replace the 'create' function (from the
-    shareProgressRequests module) with the 'create_twitter_for_test' function
+    from pytest to replace the 'create_button' function (from the
+    shareProgressRequest module) with the 'create_button_twitter_test' function
     (from the mock_functions module).
     """
-    monkeypatch.setattr(shareProgressRequests, 'create',
-        mockFunctions().create_twitter_for_test)
+    monkeypatch.setattr(shareProgressRequest, 'create_button',
+        mockFunctions().create_button_twitter_test)
 
-    twitter_button_input = twitterButtonInput().create()
+    button = generator().create_button('twitter')
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
@@ -211,75 +145,37 @@ def test_create_button_for_twitter(monkeypatch):
         'id': 11841,
         'page_url': 'http://sumofus.org/'}
 
-    assert services.create_button(twitter_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
 # Twitter variants
-def test_create_button_for_twitter_with_empty_variants_value():
-    twitter_button_input = twitterButtonInput().create()
-    twitter_button_input['variants'] = ""
+def test_create_twitter_button_with_empty_variants_value():
+    button = generator().create_button('twitter')
+    button['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
-    assert services.create_button(twitter_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_twitter_with_no_variants_provided():
-    twitter_button_input = twitterButtonInput().create()
-    del twitter_button_input['variants']
+def test_create_twitter_button_with_no_variants_provided():
+    button = generator().create_button('twitter')
+    del button['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
 
-    assert services.create_button(twitter_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
 # FACEBOOK BUTTON VALIDATION
 
-class facebookButtonInput():
-    def create(self):
-        return {
-            'key': '123456',
-            'page_url': 'http://sumofus.org/',
-            'page_title': 'My button name',
-            'auto_fill': True,
-            'button_template': 'sp_fb_large',
-            'variants': {
-                'facebook': [
-                    {'facebook_title': 'Title 1!',
-                        'facebook_description': 'Description 1',
-                        'facebook_thumbnail': 'http://path_to_thumb/1'},
-                    {'facebook_title': 'Title 2!',
-                        'facebook_description': 'Description 2',
-                        'facebook_thumbnail': 'http://path_to_thumb/2'},
-                    {'facebook_title': 'Title 3!',
-                        'facebook_description': 'Description 3',
-                        'facebook_thumbnail': 'http://path_to_thumb/3'}
-                ]
-            },
-            'advanced_options': {
-                'automatic_traffic_routing': True,
-                'buttons_optimize_actions': True,
-                'customize_params': {
-                    'param': 'param_to_use',
-                    'e': 'email_source',
-                    'f': 'facebook_source',
-                    't': 'twitter_source',
-                    'o': 'dark_social_source'
-                },
-                'id_pass': {
-                    'id': 'id',
-                    'passed': 'referrer_id'
-                }
-            }
-        }
-
-def test_create_button_for_facebook(monkeypatch):
+def test_create_facebook_button(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
-    from pytest to replace the 'create' function (from the
-    shareProgressRequests module) with the 'create_facebook_for_test' function
+    from pytest to replace the 'create_button' function (from the
+    shareProgressRequest module) with the 'create_button_facebook_test' function
     (from the mock_functions module).
     """
-    monkeypatch.setattr(shareProgressRequests, 'create',
-        mockFunctions().create_facebook_for_test)
+    monkeypatch.setattr(shareProgressRequest, 'create_button',
+        mockFunctions().create_button_facebook_test)
 
-    facebook_button_input = facebookButtonInput().create()
+    button = generator().create_button('facebook')
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,
@@ -328,71 +224,71 @@ def test_create_button_for_facebook(monkeypatch):
         'id': 11844,
         'page_url': 'http://sumofus.org/'}
 
-    assert services.create_button(facebook_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
 # Facebook variants
-def test_create_button_for_facebook_with_empty_variants_value():
-    facebook_button_input = facebookButtonInput().create()
-    facebook_button_input['variants'] = ""
+def test_create_facebook_button_with_empty_variants_value():
+    button = generator().create_button('facebook')
+    button['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
-    assert services.create_button(facebook_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_facebook_with_no_variants_provided():
-    facebook_button_input = facebookButtonInput().create()
-    del facebook_button_input['variants']
+def test_create_facebook_button_with_no_variants_provided():
+    button = generator().create_button('facebook')
+    del button['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
 
-    assert services.create_button(facebook_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
 # ALL BUTTONS VALIDATIONS
 
-def test_create_button_for_email_with_empty_API_key_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['key'] = ""
+def test_create_button_with_empty_API_key_value():
+    button = generator().create_button('email')
+    button['key'] = ''
     expected_result = ("Context: ['key'], Message: must be at least 1 "
         "characters long")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_email_with_no_API_key_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['key']
+def test_create_button_with_no_API_key_provided():
+    button = generator().create_button('email')
+    del button['key']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['key']")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_email_with_empty_page_url_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['page_url'] = ""
+def test_create_button_with_empty_page_url_value():
+    button = generator().create_button('email')
+    button['page_url'] = ''
     expected_result = ("Context: ['page_url'], Message: must be at least 1 "
         "characters long")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_email_with_no_page_url_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['page_url']
+def test_create_button_with_no_page_url_provided():
+    button = generator().create_button('email')
+    del button['page_url']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['page_url']")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_email_with_empty_button_template_value():
-    email_button_input = emailButtonInput().create()
-    email_button_input['button_template'] = ""
+def test_create_button_with_empty_button_template_value():
+    button = generator().create_button('email')
+    button['button_template'] = ''
     expected_result = ("Context: ['button_template'], Message: must match "
         "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
             "sp_fb_small|sp_fb_large)$")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result
 
-def test_create_button_for_email_with_no_button_template_provided():
-    email_button_input = emailButtonInput().create()
-    del email_button_input['button_template']
+def test_create_button_with_no_button_template_provided():
+    button = generator().create_button('email')
+    del button['button_template']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['button_template']")
 
-    assert services.create_button(email_button_input) == expected_result
+    assert services.create_button(button) == expected_result

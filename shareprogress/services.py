@@ -2,7 +2,7 @@ import json
 import valideer as V
 from valideer import ValidationError
 from filters.button_schema import buttonSchema
-from lib.share_progress_requests import shareProgressRequests
+from lib.share_progress_requests import shareProgressRequest
 
 # Managing Buttons
 def create_button(data):
@@ -118,8 +118,8 @@ def create_button(data):
         except ValidationError as e:
             return "Context: " + str(e.context) + ", Message: " + str(e.msg)
         else:
-            r = shareProgressRequests()
-            result = r.create(data)
+            sp_req = shareProgressRequest()
+            result = sp_req.create_button(data)
 
             if result['success']:
                 return result['response'][0]

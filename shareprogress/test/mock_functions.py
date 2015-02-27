@@ -1,5 +1,5 @@
 class mockFunctions():
-    def create_email_for_test(self, data):
+    def create_button_email_test(self, data):
         return {
             'message': None,
             'response': [{
@@ -54,7 +54,7 @@ class mockFunctions():
                 'page_url': 'http://sumofus.org/'}],
             'success': True}
 
-    def create_twitter_for_test(self, data):
+    def create_button_twitter_test(self, data):
         return {
             'message': None,
             'response': [{
@@ -113,7 +113,7 @@ class mockFunctions():
                 'page_url': 'http://sumofus.org/'}],
             'success': True}
 
-    def create_facebook_for_test(self, data):
+    def create_button_facebook_test(self, data):
         return {
             'message': None,
             'response': [{
