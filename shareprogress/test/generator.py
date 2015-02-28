@@ -1,5 +1,5 @@
 class generator():
-    def create_button(self, channel):
+    def create_button_payload(self, channel):
         if (channel == 'email'):
             return {
                 'key': '123456',
