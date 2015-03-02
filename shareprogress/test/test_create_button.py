@@ -1,7 +1,7 @@
 from shareprogress import services
 from shareprogress.lib.share_progress_request import shareProgressRequest
 from mock_functions import mockFunctions
-from generators import *
+from payload_generators import *
 
 # EMAIL BUTTON VALIDATION
 
