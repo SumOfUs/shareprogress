@@ -4,7 +4,7 @@ class generator():
             return {
                 'key': '123456',
                 'page_url': 'http://sumofus.org/',
-                'page_title': 'My button name',
+                'page_title': 'My Email button name',
                 'auto_fill': True,
                 'button_template': 'sp_em_large',
                 'variants': {
@@ -37,7 +37,7 @@ class generator():
             return {
                 'key': '123456',
                 'page_url': 'http://sumofus.org/',
-                'page_title': 'My button name',
+                'page_title': 'My Twitter button name',
                 'auto_fill': True,
                 'button_template': 'sp_tw_large',
                 'variants': {
@@ -67,7 +67,7 @@ class generator():
             return {
                 'key': '123456',
                 'page_url': 'http://sumofus.org/',
-                'page_title': 'My button name',
+                'page_title': 'My Facebook button name',
                 'auto_fill': True,
                 'button_template': 'sp_fb_large',
                 'variants': {
@@ -98,4 +98,21 @@ class generator():
                         'passed': 'referrer_id'
                     }
                 }
+            }
+
+    def create_read_button_payload(self, channel):
+        if (channel == 'email'):
+            return {
+                'key': '123456',
+                'id': 11858
+            }
+        elif (channel == 'twitter'):
+            return {
+                'key': '123456',
+                'id': 11864
+            }
+        elif (channel == 'facebook'):
+            return {
+                'key': '123456',
+                'id': 11865
             }

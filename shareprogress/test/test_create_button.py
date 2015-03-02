@@ -1,5 +1,5 @@
 from shareprogress import services
-from shareprogress.lib.share_progress_requests import shareProgressRequest
+from shareprogress.lib.share_progress_request import shareProgressRequest
 from mock_functions import mockFunctions
 from generator import generator
 
@@ -31,7 +31,7 @@ def test_create_email_button(monkeypatch):
             'buttons_optimize_actions': True},
         'button_template': 'sp_em_large',
         'found_snippet': False,
-        'page_title': 'My button name',
+        'page_title': 'My Email button name',
         'share_button_html': "<div class='sp_11838 sp_em_large' ></div>",
         'variants': {
             'twitter': [{
@@ -97,7 +97,7 @@ def test_create_twitter_button(monkeypatch):
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
-        'page_title': 'My button name',
+        'page_title': 'My Twitter button name',
         'advanced_options': {
             'id_pass': {
                 'id': 'id',
@@ -179,7 +179,7 @@ def test_create_facebook_button(monkeypatch):
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,
-        'page_title': 'My button name',
+        'page_title': 'My Facebook button name',
         'advanced_options': {
             'id_pass': {
                 'id': 'id',

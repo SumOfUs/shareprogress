@@ -1,8 +1,8 @@
 import json
 import valideer as V
 from valideer import ValidationError
-from filters.button_schema import buttonSchema
-from lib.share_progress_requests import shareProgressRequest
+from filters import *
+from lib.share_progress_request import shareProgressRequest
 
 # Managing Buttons
 def create_button(data):
@@ -129,12 +129,10 @@ def create_button(data):
 def update_button(id, variants):
     """Updates a ShareProgress button and returns a JSON object as response.
 
-    Arguments received
-
+    Arguments received:
     id: button ID.
-
     variants: Received arguments for the variant/s.
-    we would use the update_variant() function here.
+        we would use the update_variant() function here.
     """
     pass
 
@@ -142,51 +140,65 @@ def update_button(id, variants):
 def create_page(page_url, variants, page_title=None):
     """Creates a JSON object for a share page to be sent to ShareProgress.
 
-    Arguments received
-
+    Arguments received:
     page_url: The URL of the page to be shared.
 
     variants: Received arguments for the variant/s
-    we would use the create_variant() function here.
-
+        we would use the create_variant() function here.
     page_title: It's optional, when 'None' it will be scraped from the
-    page_url automatically.
+        page_url automatically.
     """
     pass
 
 def update_page(id, variants):
     """Updates a ShareProgress page and returns a JSON object as response.
 
-    Arguments received
-
+    Arguments received:
     id: page ID.
-
     variants: Received arguments for the variant/s.
     we would use the update_variant() function here.
     """
     pass
 
 # Reading a button or page
-def read(id, type):
+def read(data, share_type):
     """Reads the content of a ShareProgress button or page.
 
-    Arguments received
-
+    Arguments received:
     id: button or page ID.
-
-    type: 'button' or 'page' to determine the URL for the request.
+    share_type: 'button' or 'page' to determine the URL for the request.
     """
-    pass
+    read_button = readButtonSchema()
 
+    # Creates the read button schema to validate
+    email_validator = V.parse(read_button.schema())
+
+    try:
+        email_validator.validate(data)
+    except ValidationError as e:
+        return "Context: " + str(e.context) + ", Message: " + str(e.msg)
+    else:
+        sp_req = shareProgressRequest()
+
+        if (share_type == 'button'):
+            result = sp_req.read_button(data)
+        # TO DO:
+        # elif (share_type == 'page'):
+        #     result = sp_req.read_page(data)
+        # elif (share_type == 'wrapper'):
+        #     result = sp_req.read_wrapper(data)
+
+        if result['success']:
+            return result['response'][0]
+        else:
+            return result['message']
 
 # Deleting a button or page
 def delete(id, type):
     """Deletes a ShareProgress button or page.
 
-    Arguments received
-
+    Arguments received:
     id: button or page ID.
-
     type: 'button' or 'page' to determine the URL for the request.
     """
     pass
@@ -195,10 +207,8 @@ def delete(id, type):
 def update_variants(id, variants):
     """Updates a variant for a specific channel of a button or page.
 
-    Arguments received
-
+    Arguments received:
     id: button ID.
-
     variants: Received arguments for the variant/s.
     """
     pass
