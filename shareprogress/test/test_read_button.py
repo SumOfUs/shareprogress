@@ -1,7 +1,7 @@
 from shareprogress import services
 from shareprogress.lib.share_progress_request import shareProgressRequest
 from mock_functions import mockFunctions
-from generator import generator
+from generators import *
 
 # READ EMAIL BUTTON
 
@@ -15,7 +15,7 @@ def test_read_email_button(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
         mockFunctions().read_email_button_test)
 
-    payload = generator().create_read_button_payload('email')
+    payload = readButton().create_read_button_payload('email')
     expected_result = {
         'button_template': 'sp_em_large',
         'found_snippet': False,
@@ -77,7 +77,7 @@ def test_read_twitter_button(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
         mockFunctions().read_twitter_button_test)
 
-    payload = generator().create_read_button_payload('twitter')
+    payload = readButton().create_read_button_payload('twitter')
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
@@ -145,7 +145,7 @@ def test_read_facebook_button(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
         mockFunctions().read_facebook_button_test)
 
-    payload = generator().create_read_button_payload('facebook')
+    payload = readButton().create_read_button_payload('facebook')
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,

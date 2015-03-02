@@ -1,7 +1,7 @@
 from shareprogress import services
 from shareprogress.lib.share_progress_request import shareProgressRequest
 from mock_functions import mockFunctions
-from generator import generator
+from generators import *
 
 # EMAIL BUTTON VALIDATION
 
@@ -15,7 +15,7 @@ def test_create_email_button(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'create_button',
         mockFunctions().create_button_email_test)
 
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     expected_result = {
         'advanced_options': {
             'id_pass': {
@@ -67,14 +67,14 @@ def test_create_email_button(monkeypatch):
 
 # Email variants
 def test_create_email_button_with_empty_variants_value():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(payload) == expected_result
 
 def test_create_email_button_with_no_variants_provided():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     del payload['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
@@ -93,7 +93,7 @@ def test_create_twitter_button(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'create_button',
         mockFunctions().create_button_twitter_test)
 
-    payload = generator().create_button_payload('twitter')
+    payload = createButton().create_button_payload('twitter')
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
@@ -149,14 +149,14 @@ def test_create_twitter_button(monkeypatch):
 
 # Twitter variants
 def test_create_twitter_button_with_empty_variants_value():
-    payload = generator().create_button_payload('twitter')
+    payload = createButton().create_button_payload('twitter')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(payload) == expected_result
 
 def test_create_twitter_button_with_no_variants_provided():
-    payload = generator().create_button_payload('twitter')
+    payload = createButton().create_button_payload('twitter')
     del payload['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
@@ -175,7 +175,7 @@ def test_create_facebook_button(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'create_button',
         mockFunctions().create_button_facebook_test)
 
-    payload = generator().create_button_payload('facebook')
+    payload = createButton().create_button_payload('facebook')
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,
@@ -228,14 +228,14 @@ def test_create_facebook_button(monkeypatch):
 
 # Facebook variants
 def test_create_facebook_button_with_empty_variants_value():
-    payload = generator().create_button_payload('facebook')
+    payload = createButton().create_button_payload('facebook')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(payload) == expected_result
 
 def test_create_facebook_button_with_no_variants_provided():
-    payload = generator().create_button_payload('facebook')
+    payload = createButton().create_button_payload('facebook')
     del payload['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
@@ -245,7 +245,7 @@ def test_create_facebook_button_with_no_variants_provided():
 # ALL BUTTONS VALIDATIONS
 
 def test_create_button_with_empty_API_key_value():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     payload['key'] = ''
     expected_result = ("Context: ['key'], Message: must be at least 1 "
         "characters long")
@@ -253,7 +253,7 @@ def test_create_button_with_empty_API_key_value():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_no_API_key_provided():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     del payload['key']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['key']")
@@ -261,7 +261,7 @@ def test_create_button_with_no_API_key_provided():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_empty_page_url_value():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     payload['page_url'] = ''
     expected_result = ("Context: ['page_url'], Message: must be at least 1 "
         "characters long")
@@ -269,7 +269,7 @@ def test_create_button_with_empty_page_url_value():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_no_page_url_provided():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     del payload['page_url']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['page_url']")
@@ -277,7 +277,7 @@ def test_create_button_with_no_page_url_provided():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_empty_button_template_value():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     payload['button_template'] = ''
     expected_result = ("Context: ['button_template'], Message: must match "
         "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
@@ -286,7 +286,7 @@ def test_create_button_with_empty_button_template_value():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_no_button_template_provided():
-    payload = generator().create_button_payload('email')
+    payload = createButton().create_button_payload('email')
     del payload['button_template']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['button_template']")
