@@ -93,7 +93,7 @@ def create_button(data):
         'page_url': 'http://sumofus.org/'
     }
     """
-    button = buttonSchema()
+    button = createButtonSchema()
 
     # Creates the general button schema to validate
     email_validator = V.parse(button.schema())

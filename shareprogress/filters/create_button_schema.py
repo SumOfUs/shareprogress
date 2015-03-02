@@ -1,7 +1,7 @@
 import valideer as V
 import re
 
-class buttonSchema():
+class createButtonSchema():
     # General button schema
     def schema(self):
         return {
