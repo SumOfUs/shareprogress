@@ -201,15 +201,15 @@ def test_create_facebook_button(monkeypatch):
             'facebook': [{
                 'facebook_title': 'Title 1!',
                     'facebook_description': 'Description 1',
-                    'facebook_thumbnail': 'http://path_to_thumb/1',
+                    'facebook_thumbnail': 'http://path_to_thumb/1.jpg',
                     'id': 47009}, {
                 'facebook_title': 'Title 2!',
                     'facebook_description': 'Description 2',
-                    'facebook_thumbnail': 'http://path_to_thumb/2',
+                    'facebook_thumbnail': 'http://path_to_thumb/2.jpg',
                     'id': 47010}, {
                 'facebook_title': 'Title 3!',
                     'facebook_description': 'Description 3',
-                    'facebook_thumbnail': 'http://path_to_thumb/3',
+                    'facebook_thumbnail': 'http://path_to_thumb/3.jpg',
                     'id': 47011}],
             'email': [{
                 'email_subject': 'SumOfUs',

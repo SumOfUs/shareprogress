@@ -74,13 +74,13 @@ class createButton():
                     'facebook': [
                         {'facebook_title': 'Title 1!',
                             'facebook_description': 'Description 1',
-                            'facebook_thumbnail': 'http://path_to_thumb/1'},
+                            'facebook_thumbnail': 'http://path_to_thumb/1.jpg'},
                         {'facebook_title': 'Title 2!',
                             'facebook_description': 'Description 2',
-                            'facebook_thumbnail': 'http://path_to_thumb/2'},
+                            'facebook_thumbnail': 'http://path_to_thumb/2.jpg'},
                         {'facebook_title': 'Title 3!',
                             'facebook_description': 'Description 3',
-                            'facebook_thumbnail': 'http://path_to_thumb/3'}
+                            'facebook_thumbnail': 'http://path_to_thumb/3.jpg'}
                     ]
                 },
                 'advanced_options': {

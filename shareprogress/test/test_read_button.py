@@ -172,15 +172,15 @@ def test_read_facebook_button(monkeypatch):
             'facebook': [{
                 'facebook_title': 'Title 1!',
                     'facebook_description': 'Description 1',
-                    'facebook_thumbnail': 'http://path_to_thumb/1',
+                    'facebook_thumbnail': 'http://path_to_thumb/1.jpg',
                     'id': 47126}, {
                 'facebook_title': 'Title 2!',
                     'facebook_description': 'Description 2',
-                    'facebook_thumbnail': 'http://path_to_thumb/2',
+                    'facebook_thumbnail': 'http://path_to_thumb/2.jpg',
                     'id': 47127}, {
                 'facebook_title': 'Title 3!',
                     'facebook_description': 'Description 3',
-                    'facebook_thumbnail': 'http://path_to_thumb/3',
+                    'facebook_thumbnail': 'http://path_to_thumb/3.jpg',
                     'id': 47128}],
             'email': [{
                 'email_subject': 'SumOfUs',
