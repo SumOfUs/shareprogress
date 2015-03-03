@@ -208,10 +208,6 @@ def test_update_facebook_button(monkeypatch):
                     'facebook_description': 'NEW Description 1',
                     'facebook_thumbnail': 'http://path_to_thumb/1.jpg',
                     'id': 47126}, {
-                'facebook_title': 'NEW Title 2!',
-                    'facebook_description': 'NEW Description 2',
-                    'facebook_thumbnail': 'http://path_to_thumb/2.jpg',
-                    'id': 47127}, {
                 'facebook_title': 'NEW Title 3!',
                     'facebook_description': 'NEW Description 3',
                     'facebook_thumbnail': 'http://path_to_thumb/3.jpg',
