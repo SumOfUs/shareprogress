@@ -151,10 +151,10 @@ def update_button(data):
         # Creates the button schema to validate
         button_schema = updateButtonSchema()
 
-        """If the data to update the button includes 'button_template' key,
-        we set the proper button_validator using that key.
-        """
         if ('button_template' in data and data['button_template'] != ''):
+            """If the data to update the button includes 'button_template' key,
+            we set the proper button_validator using that key.
+            """
             if (data['button_template'][3:5] == 'em'):
                 button_validator = V.parse(button_schema.email())
             elif (data['button_template'][3:5] == 'tw'):
