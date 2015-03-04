@@ -5,15 +5,15 @@ from payload_generators import *
 
 # READ EMAIL BUTTON
 
-def test_read_email_button(monkeypatch):
+def test_read_button_email(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'read_button' function (from the
-    shareProgressRequest module) with the 'read_email_button_test' function
+    shareProgressRequest module) with the 'read_button_email_test' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_email_button_test)
+        mockFunctions().read_button_email_test)
 
     payload = readButton().create_read_button_payload('email')
     expected_result = {
@@ -67,15 +67,15 @@ def test_read_email_button(monkeypatch):
 
     assert services.read(payload, 'button') == expected_result
 
-def test_read_twitter_button(monkeypatch):
+def test_read_button_twitter(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'read_button' function (from the
-    shareProgressRequest module) with the 'read_twitter_button_test' function
+    shareProgressRequest module) with the 'read_button_twitter_test' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_twitter_button_test)
+        mockFunctions().read_button_twitter_test)
 
     payload = readButton().create_read_button_payload('twitter')
     expected_result = {
@@ -135,15 +135,15 @@ def test_read_twitter_button(monkeypatch):
 
     assert services.read(payload, 'button') == expected_result
 
-def test_read_facebook_button(monkeypatch):
+def test_read_button_facebook(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'read_button' function (from the
-    shareProgressRequest module) with the 'read_facebook_button_test' function
+    shareProgressRequest module) with the 'read_button_facebook_test' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_facebook_button_test)
+        mockFunctions().read_button_facebook_test)
 
     payload = readButton().create_read_button_payload('facebook')
     expected_result = {

@@ -10,13 +10,13 @@ def test_update_email_button(monkeypatch):
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' and 'read_button' function
     (from the shareProgressRequest module) with the 'update_button_email_test'
-    and 'read_email_button_test' function (from the mock_functions module).
+    and 'read_button_email_test' function (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
         mockFunctions().update_button_email_test)
 
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_email_button_test)
+        mockFunctions().read_button_email_test)
 
     payload = updateButton().update_button_payload('email')
     expected_result = {
@@ -73,7 +73,7 @@ def test_update_email_button(monkeypatch):
 # Email variants
 def test_update_email_button_with_empty_variants_value(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_email_button_test)
+        mockFunctions().read_button_email_test)
 
     payload = updateButton().update_button_payload('email')
     payload['variants'] = ''
@@ -88,13 +88,13 @@ def test_update_twitter_button(monkeypatch):
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' and 'read_button' function
     (from the shareProgressRequest module) with the 'update_button_twitter_test'
-    and 'read_twitter_button_test' function (from the mock_functions module).
+    and 'read_button_twitter_test' function (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
         mockFunctions().update_button_twitter_test)
 
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_twitter_button_test)
+        mockFunctions().read_button_twitter_test)
 
     payload = updateButton().update_button_payload('twitter')
     expected_result = {
@@ -156,7 +156,7 @@ def test_update_twitter_button(monkeypatch):
 # Twitter variants
 def test_update_twitter_button_with_empty_variants_value(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_twitter_button_test)
+        mockFunctions().read_button_twitter_test)
 
     payload = updateButton().update_button_payload('twitter')
     payload['variants'] = ''
@@ -171,13 +171,13 @@ def test_update_facebook_button(monkeypatch):
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' and 'read_button' function
     (from the shareProgressRequest module) with the 'update_button_facebook_test'
-    and 'read_facebook_button_test' function (from the mock_functions module).
+    and 'read_button_facebook_test' function (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
         mockFunctions().update_button_facebook_test)
 
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_facebook_button_test)
+        mockFunctions().read_button_facebook_test)
 
     payload = updateButton().update_button_payload('facebook')
     expected_result = {
@@ -232,7 +232,7 @@ def test_update_facebook_button(monkeypatch):
 # Facebook variants
 def test_update_facebook_button_with_empty_variants_value(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_facebook_button_test)
+        mockFunctions().read_button_facebook_test)
 
     payload = updateButton().update_button_payload('facebook')
     payload['variants'] = ''

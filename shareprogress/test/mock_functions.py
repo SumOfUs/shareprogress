@@ -171,7 +171,7 @@ class mockFunctions():
             'success': True
         }
 
-    def read_email_button_test(self, data):
+    def read_button_email_test(self, data):
         return {
             'message': None,
             'response': [{
@@ -224,7 +224,7 @@ class mockFunctions():
             'success': True
         }
 
-    def read_twitter_button_test(self, data):
+    def read_button_twitter_test(self, data):
         return {
             'message': None,
             'response': [{
@@ -283,7 +283,7 @@ class mockFunctions():
             'success': True
         }
 
-    def read_facebook_button_test(self, data):
+    def read_button_facebook_test(self, data):
         return {
             'message': None,
             'response': [{
