@@ -254,7 +254,8 @@ def delete(data, share_type):
     """Deletes a ShareProgress button or page.
 
     Arguments received:
-    id: button or page ID.
+    data: A dictionary containing all the needed info about the button or
+        page to be deleted.
     share_type: 'button' or 'page' to determine the URL for the request.
     """
     button_schema = readButtonSchema()
