@@ -5,20 +5,20 @@ from payload_generators import *
 
 # EMAIL BUTTON VALIDATION
 
-def test_update_email_button(monkeypatch):
+def test_update_button_email(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' and 'read_button' function
-    (from the shareProgressRequest module) with the 'update_button_email_test'
-    and 'read_button_email_test' function (from the mock_functions module).
+    (from the shareProgressRequest module) with the 'update_button_email'
+    and 'read_button_email' function (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
-        mockFunctions().update_button_email_test)
+        mockFunctions().update_button_email)
 
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_email_test)
+        mockFunctions().read_button_email)
 
-    payload = updateButton().update_button_payload('email')
+    payload = updateButton().payload('email')
     expected_result = {
         'button_template': 'sp_em_small',
         'found_snippet': False,
@@ -71,11 +71,11 @@ def test_update_email_button(monkeypatch):
     assert services.update_button(payload) == expected_result
 
 # Email variants
-def test_update_email_button_with_empty_variants_value(monkeypatch):
+def test_update_button_email_with_empty_variants_value(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_email_test)
+        mockFunctions().read_button_email)
 
-    payload = updateButton().update_button_payload('email')
+    payload = updateButton().payload('email')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
@@ -83,20 +83,20 @@ def test_update_email_button_with_empty_variants_value(monkeypatch):
 
 # TWITTER BUTTON VALIDATION
 
-def test_update_twitter_button(monkeypatch):
+def test_update_button_twitter(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' and 'read_button' function
-    (from the shareProgressRequest module) with the 'update_button_twitter_test'
-    and 'read_button_twitter_test' function (from the mock_functions module).
+    (from the shareProgressRequest module) with the 'update_button_twitter'
+    and 'read_button_twitter' function (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
-        mockFunctions().update_button_twitter_test)
+        mockFunctions().update_button_twitter)
 
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_twitter_test)
+        mockFunctions().read_button_twitter)
 
-    payload = updateButton().update_button_payload('twitter')
+    payload = updateButton().payload('twitter')
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
@@ -154,11 +154,11 @@ def test_update_twitter_button(monkeypatch):
     assert services.update_button(payload) == expected_result
 
 # Twitter variants
-def test_update_twitter_button_with_empty_variants_value(monkeypatch):
+def test_update_button_twitter_with_empty_variants_value(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_twitter_test)
+        mockFunctions().read_button_twitter)
 
-    payload = updateButton().update_button_payload('twitter')
+    payload = updateButton().payload('twitter')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
@@ -166,20 +166,20 @@ def test_update_twitter_button_with_empty_variants_value(monkeypatch):
 
 # FACEBOOK BUTTON VALIDATION
 
-def test_update_facebook_button(monkeypatch):
+def test_update_button_facebook(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' and 'read_button' function
-    (from the shareProgressRequest module) with the 'update_button_facebook_test'
-    and 'read_button_facebook_test' function (from the mock_functions module).
+    (from the shareProgressRequest module) with the 'update_button_facebook'
+    and 'read_button_facebook' function (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
-        mockFunctions().update_button_facebook_test)
+        mockFunctions().update_button_facebook)
 
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_facebook_test)
+        mockFunctions().read_button_facebook)
 
-    payload = updateButton().update_button_payload('facebook')
+    payload = updateButton().payload('facebook')
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,
@@ -230,11 +230,11 @@ def test_update_facebook_button(monkeypatch):
     assert services.update_button(payload) == expected_result
 
 # Facebook variants
-def test_update_facebook_button_with_empty_variants_value(monkeypatch):
+def test_update_button_facebook_with_empty_variants_value(monkeypatch):
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_facebook_test)
+        mockFunctions().read_button_facebook)
 
-    payload = updateButton().update_button_payload('facebook')
+    payload = updateButton().payload('facebook')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 

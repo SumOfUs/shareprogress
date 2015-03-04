@@ -5,17 +5,17 @@ from payload_generators import *
 
 # EMAIL BUTTON VALIDATION
 
-def test_create_email_button(monkeypatch):
+def test_create_button_email(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' function (from the
-    shareProgressRequest module) with the 'create_button_email_test' function
+    shareProgressRequest module) with the 'create_button_email' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
-        mockFunctions().create_button_email_test)
+        mockFunctions().create_button_email)
 
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     expected_result = {
         'advanced_options': {
             'id_pass': {
@@ -66,15 +66,15 @@ def test_create_email_button(monkeypatch):
     assert services.create_button(payload) == expected_result
 
 # Email variants
-def test_create_email_button_with_empty_variants_value():
-    payload = createButton().create_button_payload('email')
+def test_create_button_email_with_empty_variants_value():
+    payload = createButton().payload('email')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(payload) == expected_result
 
-def test_create_email_button_with_no_variants_provided():
-    payload = createButton().create_button_payload('email')
+def test_create_button_email_with_no_variants_provided():
+    payload = createButton().payload('email')
     del payload['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
@@ -83,17 +83,17 @@ def test_create_email_button_with_no_variants_provided():
 
 # TWITTER BUTTON VALIDATION
 
-def test_create_twitter_button(monkeypatch):
+def test_create_button_twitter(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' function (from the
-    shareProgressRequest module) with the 'create_button_twitter_test' function
+    shareProgressRequest module) with the 'create_button_twitter' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
-        mockFunctions().create_button_twitter_test)
+        mockFunctions().create_button_twitter)
 
-    payload = createButton().create_button_payload('twitter')
+    payload = createButton().payload('twitter')
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
@@ -148,15 +148,15 @@ def test_create_twitter_button(monkeypatch):
     assert services.create_button(payload) == expected_result
 
 # Twitter variants
-def test_create_twitter_button_with_empty_variants_value():
-    payload = createButton().create_button_payload('twitter')
+def test_create_button_twitter_with_empty_variants_value():
+    payload = createButton().payload('twitter')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(payload) == expected_result
 
-def test_create_twitter_button_with_no_variants_provided():
-    payload = createButton().create_button_payload('twitter')
+def test_create_button_twitter_with_no_variants_provided():
+    payload = createButton().payload('twitter')
     del payload['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
@@ -165,17 +165,17 @@ def test_create_twitter_button_with_no_variants_provided():
 
 # FACEBOOK BUTTON VALIDATION
 
-def test_create_facebook_button(monkeypatch):
+def test_create_button_facebook(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'create_button' function (from the
-    shareProgressRequest module) with the 'create_button_facebook_test' function
+    shareProgressRequest module) with the 'create_button_facebook' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'create_button',
-        mockFunctions().create_button_facebook_test)
+        mockFunctions().create_button_facebook)
 
-    payload = createButton().create_button_payload('facebook')
+    payload = createButton().payload('facebook')
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,
@@ -227,15 +227,15 @@ def test_create_facebook_button(monkeypatch):
     assert services.create_button(payload) == expected_result
 
 # Facebook variants
-def test_create_facebook_button_with_empty_variants_value():
-    payload = createButton().create_button_payload('facebook')
+def test_create_button_facebook_with_empty_variants_value():
+    payload = createButton().payload('facebook')
     payload['variants'] = ''
     expected_result = ("Context: ['variants'], Message: must be Mapping")
 
     assert services.create_button(payload) == expected_result
 
-def test_create_facebook_button_with_no_variants_provided():
-    payload = createButton().create_button_payload('facebook')
+def test_create_button_facebook_with_no_variants_provided():
+    payload = createButton().payload('facebook')
     del payload['variants']
     expected_result = ("Context: [], Message: missing required properties: " +
         "['variants']")
@@ -245,7 +245,7 @@ def test_create_facebook_button_with_no_variants_provided():
 # ALL BUTTONS VALIDATIONS
 
 def test_create_button_with_empty_API_key_value():
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     payload['key'] = ''
     expected_result = ("Context: ['key'], Message: must be at least 1 "
         "characters long")
@@ -253,7 +253,7 @@ def test_create_button_with_empty_API_key_value():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_no_API_key_provided():
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     del payload['key']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['key']")
@@ -261,7 +261,7 @@ def test_create_button_with_no_API_key_provided():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_empty_page_url_value():
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     payload['page_url'] = ''
     expected_result = ("Context: ['page_url'], Message: must be at least 1 "
         "characters long")
@@ -269,7 +269,7 @@ def test_create_button_with_empty_page_url_value():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_no_page_url_provided():
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     del payload['page_url']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['page_url']")
@@ -277,7 +277,7 @@ def test_create_button_with_no_page_url_provided():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_empty_button_template_value():
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     payload['button_template'] = ''
     expected_result = ("Context: ['button_template'], Message: must match "
         "pattern ^(sp_em_small|sp_em_large|sp_tw_small|sp_tw_large|"
@@ -286,7 +286,7 @@ def test_create_button_with_empty_button_template_value():
     assert services.create_button(payload) == expected_result
 
 def test_create_button_with_no_button_template_provided():
-    payload = createButton().create_button_payload('email')
+    payload = createButton().payload('email')
     del payload['button_template']
     expected_result = ("Context: [], Message: missing required "
         "properties: ['button_template']")

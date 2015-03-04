@@ -9,13 +9,13 @@ def test_read_button_email(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'read_button' function (from the
-    shareProgressRequest module) with the 'read_button_email_test' function
+    shareProgressRequest module) with the 'read_button_email' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_email_test)
+        mockFunctions().read_button_email)
 
-    payload = readButton().create_read_button_payload('email')
+    payload = readButton().payload('email')
     expected_result = {
         'button_template': 'sp_em_large',
         'found_snippet': False,
@@ -71,13 +71,13 @@ def test_read_button_twitter(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'read_button' function (from the
-    shareProgressRequest module) with the 'read_button_twitter_test' function
+    shareProgressRequest module) with the 'read_button_twitter' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_twitter_test)
+        mockFunctions().read_button_twitter)
 
-    payload = readButton().create_read_button_payload('twitter')
+    payload = readButton().payload('twitter')
     expected_result = {
         'button_template': 'sp_tw_large',
         'found_snippet': False,
@@ -139,13 +139,13 @@ def test_read_button_facebook(monkeypatch):
     """Monkeypatching
     To avoid sending an actual request to Shareprogress we use monkeypatch
     from pytest to replace the 'read_button' function (from the
-    shareProgressRequest module) with the 'read_button_facebook_test' function
+    shareProgressRequest module) with the 'read_button_facebook' function
     (from the mock_functions module).
     """
     monkeypatch.setattr(shareProgressRequest, 'read_button',
-        mockFunctions().read_button_facebook_test)
+        mockFunctions().read_button_facebook)
 
-    payload = readButton().create_read_button_payload('facebook')
+    payload = readButton().payload('facebook')
     expected_result = {
         'button_template': 'sp_fb_large',
         'found_snippet': False,

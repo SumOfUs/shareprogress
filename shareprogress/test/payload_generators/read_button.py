@@ -1,5 +1,5 @@
 class readButton():
-    def create_read_button_payload(self, channel):
+    def payload(self, channel):
         if (channel == 'email'):
             return {
                 'key': '123456',

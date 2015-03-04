@@ -1,5 +1,5 @@
 class updateButton():
-    def update_button_payload(self, channel):
+    def payload(self, channel):
         if (channel == 'email'):
             return {
                 'id': 11863,

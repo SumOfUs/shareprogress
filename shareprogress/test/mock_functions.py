@@ -1,5 +1,5 @@
 class mockFunctions():
-    def create_button_email_test(self, data):
+    def create_button_email(self, data):
         return {
             'message': None,
             'response': [{
@@ -55,7 +55,7 @@ class mockFunctions():
             'success': True
         }
 
-    def create_button_twitter_test(self, data):
+    def create_button_twitter(self, data):
         return {
             'message': None,
             'response': [{
@@ -115,7 +115,7 @@ class mockFunctions():
             'success': True
         }
 
-    def create_button_facebook_test(self, data):
+    def create_button_facebook(self, data):
         return {
             'message': None,
             'response': [{
@@ -171,7 +171,7 @@ class mockFunctions():
             'success': True
         }
 
-    def read_button_email_test(self, data):
+    def read_button_email(self, data):
         return {
             'message': None,
             'response': [{
@@ -224,7 +224,7 @@ class mockFunctions():
             'success': True
         }
 
-    def read_button_twitter_test(self, data):
+    def read_button_twitter(self, data):
         return {
             'message': None,
             'response': [{
@@ -283,7 +283,7 @@ class mockFunctions():
             'success': True
         }
 
-    def read_button_facebook_test(self, data):
+    def read_button_facebook(self, data):
         return {
             'message': None,
             'response': [{
@@ -338,7 +338,7 @@ class mockFunctions():
             'success': True
         }
 
-    def update_button_email_test(self, data):
+    def update_button_email(self, data):
         return {
             'message': None,
             'response': [{
@@ -391,7 +391,7 @@ class mockFunctions():
             'success': True
         }
 
-    def update_button_twitter_test(self, data):
+    def update_button_twitter(self, data):
         return {
             'message': None,
             'response': [{
@@ -449,7 +449,7 @@ class mockFunctions():
             'success': True
         }
 
-    def update_button_facebook_test(self, data):
+    def update_button_facebook(self, data):
         return {
             'message': None,
             'response': [{
