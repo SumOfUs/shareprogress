@@ -3,7 +3,7 @@ from shareprogress.lib.share_progress_request import shareProgressRequest
 from mock_functions import mockFunctions
 from payload_generators import *
 
-# READ EMAIL BUTTON
+# READ BUTTON EMAIL
 
 def test_read_button_email(monkeypatch):
     """Monkeypatching
@@ -66,6 +66,8 @@ def test_read_button_email(monkeypatch):
     }
 
     assert services.read(payload, 'button') == expected_result
+
+# READ BUTTON TWITTER
 
 def test_read_button_twitter(monkeypatch):
     """Monkeypatching
@@ -134,6 +136,8 @@ def test_read_button_twitter(monkeypatch):
     }
 
     assert services.read(payload, 'button') == expected_result
+
+# READ BUTTON FACEBOOK
 
 def test_read_button_facebook(monkeypatch):
     """Monkeypatching

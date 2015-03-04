@@ -3,7 +3,7 @@ from shareprogress.lib.share_progress_request import shareProgressRequest
 from mock_functions import mockFunctions
 from payload_generators import *
 
-# EMAIL BUTTON VALIDATION
+# UPDATE BUTTON EMAIL
 
 def test_update_button_email(monkeypatch):
     """Monkeypatching
@@ -81,7 +81,7 @@ def test_update_button_email_with_empty_variants_value(monkeypatch):
 
     assert services.update_button(payload) == expected_result
 
-# TWITTER BUTTON VALIDATION
+# UPDATE BUTTON TWITTER
 
 def test_update_button_twitter(monkeypatch):
     """Monkeypatching
@@ -164,7 +164,7 @@ def test_update_button_twitter_with_empty_variants_value(monkeypatch):
 
     assert services.update_button(payload) == expected_result
 
-# FACEBOOK BUTTON VALIDATION
+# UPDATE BUTTON FACEBOOK
 
 def test_update_button_facebook(monkeypatch):
     """Monkeypatching
