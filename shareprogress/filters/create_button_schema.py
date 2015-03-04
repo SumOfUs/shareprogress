@@ -32,7 +32,7 @@ class createButtonSchema():
         }
 
     # Email button variants schema
-    def email_schema(self):
+    def email_variants(self):
         return {
             "+variants": {
                 "+email": [
@@ -43,7 +43,7 @@ class createButtonSchema():
         }
 
     # Twitter button variants schema
-    def twitter_schema(self):
+    def twitter_variants(self):
         return {
             "+variants": {
                 "+twitter": [
@@ -53,7 +53,7 @@ class createButtonSchema():
         }
 
     # Facebook button variants schema
-    def facebook_schema(self):
+    def facebook_variants(self):
         return {
             "+variants": {
                 "+facebook": [

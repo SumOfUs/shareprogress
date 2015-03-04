@@ -93,14 +93,14 @@ def create_button(data):
         'page_url': 'http://sumofus.org/'
     }
     """
-    button = createButtonSchema()
+    button_schema = createButtonSchema()
 
     # Creates the general button schema to validate
-    validator = V.parse(button.schema())
+    button_validator = V.parse(button_schema.schema())
 
-    # Once validator is set, we try to validate the input data
+    # Once button_validator is set, we try to validate the input data
     try:
-        validator.validate(data)
+        button_validator.validate(data)
     except ValidationError as e:
         return "Context: " + str(e.context) + ", Message: " + str(e.msg)
     else:
@@ -109,11 +109,11 @@ def create_button(data):
         specific schema to validate variants.
         """
         if (data['button_template'][3:5] == 'em'):
-            variants_validator = V.parse(button.email_schema())
+            variants_validator = V.parse(button_schema.email_variants())
         elif (data['button_template'][3:5] == 'tw'):
-            variants_validator = V.parse(button.twitter_schema())
+            variants_validator = V.parse(button_schema.twitter_variants())
         elif (data['button_template'][3:5] == 'fb'):
-            variants_validator = V.parse(button.facebook_schema())
+            variants_validator = V.parse(button_schema.facebook_variants())
 
         # Once variants_validator is set, we try to validate the input data
         try:
@@ -149,32 +149,33 @@ def update_button(data):
         found_button = result['response'][0]
 
         # Creates the button schema to validate
-        button = updateButtonSchema()
+        button_schema = updateButtonSchema()
 
         """If the data to update the button includes 'button_template' key,
-        we set the proper validator using that key.
+        we set the proper button_validator using that key.
         """
         if ('button_template' in data and data['button_template'] != ''):
             if (data['button_template'][3:5] == 'em'):
-                validator = V.parse(button.email_schema())
+                button_validator = V.parse(button_schema.email())
             elif (data['button_template'][3:5] == 'tw'):
-                validator = V.parse(button.twitter_schema())
+                button_validator = V.parse(button_schema.twitter())
             elif (data['button_template'][3:5] == 'fb'):
-                validator = V.parse(button.facebook_schema())
+                button_validator = V.parse(button_schema.facebook())
         else:
-            """If the data to update the button doesn't include 'button_template'
-            key, we set the proper validator using that key from found_button.
+            """If the data to update the button doesn't include
+            'button_template' key, we set the proper button_validator using
+            that key from found_button.
             """
             if (found_button['button_template'][3:5] == 'em'):
-                validator = V.parse(button.email_schema())
+                button_validator = V.parse(button_schema.email())
             elif (found_button['button_template'][3:5] == 'tw'):
-                validator = V.parse(button.twitter_schema())
+                button_validator = V.parse(button_schema.twitter())
             elif (found_button['button_template'][3:5] == 'fb'):
-                validator = V.parse(button.facebook_schema())
+                button_validator = V.parse(button_schema.facebook())
 
-        # Once validator is set, we try to validate the input data
+        # Once button_validator is set, we try to validate the input data
         try:
-            validator.validate(data)
+            button_validator.validate(data)
         except ValidationError as e:
             return "Context: " + str(e.context) + ", Message: " + str(e.msg)
 
@@ -224,13 +225,13 @@ def read(data, share_type):
     id: button or page ID.
     share_type: 'button' or 'page' to determine the URL for the request.
     """
-    read_button = readButtonSchema()
+    button_schema = readButtonSchema()
 
     # Creates the read button schema to validate
-    validator = V.parse(read_button.schema())
+    button_validator = V.parse(button_schema.schema())
 
     try:
-        validator.validate(data)
+        button_validator.validate(data)
     except ValidationError as e:
         return "Context: " + str(e.context) + ", Message: " + str(e.msg)
     else:

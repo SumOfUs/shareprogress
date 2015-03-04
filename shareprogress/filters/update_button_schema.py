@@ -3,7 +3,7 @@ import re
 
 class updateButtonSchema():
     # Email button schema
-    def email_schema(self):
+    def email(self):
         return {
             # required parameters (marked with a '+' before the key name)
             "+id": "integer",
@@ -39,7 +39,7 @@ class updateButtonSchema():
         }
 
     # Twitter button schema
-    def twitter_schema(self):
+    def twitter(self):
         return {
             # required parameters (marked with a '+' before the key name)
             "+id": "integer",
@@ -74,7 +74,7 @@ class updateButtonSchema():
         }
 
     # Facebook button schema
-    def facebook_schema(self):
+    def facebook(self):
         return {
             # required parameters (marked with a '+' before the key name)
             "+id": "integer",
