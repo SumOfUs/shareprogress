@@ -13,3 +13,9 @@ class shareProgressRequest():
         r = requests.get("https://run.shareprogress.org/api/v1/buttons/read",
             data=json.dumps(payload), headers=headers)
         return r.json()
+
+    def delete_button(self, payload):
+        headers = {'Content-Type': 'application/json'}
+        r = requests.post("https://run.shareprogress.org/api/v1/buttons/delete",
+            data=json.dumps(payload), headers=headers)
+        return r.json()

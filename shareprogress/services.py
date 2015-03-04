@@ -250,11 +250,36 @@ def read(data, share_type):
             return result['message']
 
 # Deleting a button or page
-def delete(id, share_type):
+def delete(data, share_type):
     """Deletes a ShareProgress button or page.
 
     Arguments received:
     id: button or page ID.
     share_type: 'button' or 'page' to determine the URL for the request.
     """
-    pass
+    button_schema = readButtonSchema()
+
+    """Here we use the read button schema to validate the input data, as
+    the same validations are needed to delete a button ('id' and 'key').
+    """
+    button_validator = V.parse(button_schema.schema())
+
+    try:
+        button_validator.validate(data)
+    except ValidationError as e:
+        return "Context: " + str(e.context) + ", Message: " + str(e.msg)
+    else:
+        sp_req = shareProgressRequest()
+
+        if (share_type == 'button'):
+            result = sp_req.delete_button(data)
+        # TO DO:
+        # elif (share_type == 'page'):
+        #     result = sp_req.delete_page(data)
+        # elif (share_type == 'wrapper'):
+        #     result = sp_req.delete_wrapper(data)
+
+        if result['success']:
+            return result['response'][0]
+        else:
+            return result['message']

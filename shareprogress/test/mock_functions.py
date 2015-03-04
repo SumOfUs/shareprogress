@@ -1,4 +1,6 @@
 class mockFunctions():
+
+    # CREATE BUTTON
     def create_button_email(self, data):
         return {
             'message': None,
@@ -171,6 +173,8 @@ class mockFunctions():
             'success': True
         }
 
+    # READ BUTTON
+
     def read_button_email(self, data):
         return {
             'message': None,
@@ -338,6 +342,8 @@ class mockFunctions():
             'success': True
         }
 
+    # UPDATE BUTTON
+
     def update_button_email(self, data):
         return {
             'message': None,
@@ -495,6 +501,50 @@ class mockFunctions():
                             "global economy. It's not going to be fast or " +
                             "easy. But if enough of us come together, we " +
                             "can make a real difference.\n{LINK}"}]},
+                'id': 11865,
+                'page_url': 'http://sumofus.org/new-url'}],
+            'success': True
+        }
+
+    # DELETE BUTTON
+
+    def delete_button_email(self, data):
+        return {
+            'message': None,
+            'response': [{
+                'button_template': 'sp_em_small',
+                'page_title': 'My Email button name',
+                'is_active': True,
+                'share_button_html': "<div class='sp_11863 sp_em_small' >" +
+                    "</div>",
+                'id': 11863,
+                'page_url': 'http://sumofus.org/'}],
+            'success': True
+        }
+
+    def delete_button_twitter(self, data):
+        return {
+            'message': None,
+            'response': [{
+                'button_template': 'sp_tw_large',
+                'page_title': 'My Twitter NEW button name',
+                'is_active': True,
+                'share_button_html': "<div class='sp_11864 sp_tw_large' >" +
+                    "</div>",
+                'id': 11864,
+                'page_url': 'http://sumofus.org/new-url'}],
+            'success': True
+        }
+
+    def delete_button_facebook(self, data):
+        return {
+            'message': None,
+            'response': [{
+                'button_template': 'sp_fb_large',
+                'page_title': 'My NEW Facebook button name',
+                'is_active': True,
+                'share_button_html': "<div class='sp_11865 sp_fb_large' >" +
+                    "</div>",
                 'id': 11865,
                 'page_url': 'http://sumofus.org/new-url'}],
             'success': True
