@@ -194,26 +194,25 @@ def update_button(data):
         return result['message']
 
 # Managing Pages
-def create_page(page_url, variants, page_title=None):
-    """Creates a JSON object for a share page to be sent to ShareProgress.
+def create_page(data):
+    """Validates the input (a dictionary) to send a POST request to
+    ShareProgress to create a share page. The result could be:
+    a) A dictionary containing the information of the created page or,
+    b) An Error message from ShareProgress (i.e. 'Bad API key').
 
     Arguments received:
-    page_url: The URL of the page to be shared.
-
-    variants: Received arguments for the variant/s
-        we would use the create_variant() function here.
-    page_title: It's optional, when 'None' it will be scraped from the
-        page_url automatically.
+    data: A dictionary containing all the info about the page.
     """
     pass
 
-def update_page(id, variants):
-    """Updates a ShareProgress page and returns a JSON object as response.
+def update_page(data):
+    """Validates the input (a dictionary) to send a POST request to
+    ShareProgress to update a share page. The result could be:
+    a) A dictionary containing the information of the updated page or,
+    b) An Error message from ShareProgress (i.e. 'Bad API key').
 
     Arguments received:
-    id: page ID.
-    variants: Received arguments for the variant/s.
-    we would use the update_variant() function here.
+    data: A dictionary containing all the info about the page to be updated.
     """
     pass
 
@@ -251,11 +250,11 @@ def read(data, share_type):
             return result['message']
 
 # Deleting a button or page
-def delete(id, type):
+def delete(id, share_type):
     """Deletes a ShareProgress button or page.
 
     Arguments received:
     id: button or page ID.
-    type: 'button' or 'page' to determine the URL for the request.
+    share_type: 'button' or 'page' to determine the URL for the request.
     """
     pass
